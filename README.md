@@ -13,7 +13,6 @@ Ravi Harun
   frameborder="0"
 ></iframe>
 
-print(counts[['Quarter', 'Count']].head().to_markdown(index=False))
 
 | cause_category     | climate_category   |
 |:-------------------|:-------------------|
