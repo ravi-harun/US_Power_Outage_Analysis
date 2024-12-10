@@ -6,11 +6,13 @@
 
 ## Introduction
 
-Power outages disrupt the daily lives of millions and result in billions of dollars in economic losses annually, particularly in regions prone to extreme weather events [1]. This analysis investigates: *What factors have the most influence on the duration of a power outage?* Using historical outage data from January 2000 to July 2016, we seek to understand trends and potential patterns.
+Power outages disrupt the daily lives of millions and result in billions of dollars in economic losses annually, particularly in regions prone to extreme weather events <a name="cite_ref-1"></a>[<sup>1</sup>](#cite_note-1). Beyond the immediate inconvenience of losing electricity, these outages often have far-reaching effects on public safety, health services, and economic stability.
 
-First, we imported the power outages dataset downloaded from [Purdue University](https://engineering.purdue.edu/LASCI/research-data/outages). There are 1534 rows in the raw dataset.
+This analysis investigates: *What factors have the most influence on the cause and duration of a power outage?* By leveraging historical outage data from January 2000 to July 2016 across the United States, we aim to uncover trends, identify key drivers of prolonged outages, and offer insights into mitigation strategies. Understanding these patterns can inform more resilient infrastructure planning and targeted interventions to minimize disruption.
 
-The table below contains a data dictionary on relevant columns for our analysis (using our cleaned data).
+The data used for our analysis is sourced from [Purdue University](https://engineering.purdue.edu/LASCI/research-data/outages). This raw dataset contains 1534 rows.
+
+The table below contains a data dictionary on a subset of relevant columns utilized for our analysis (referenced by our cleaned data in snake case).
 
 |Variable name|Description|
 |---|---|
@@ -34,7 +36,11 @@ The table below contains a data dictionary on relevant columns for our analysis 
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
 
-We dropped extra columns that remained from converting the raw Excel dataset into a Pandas DataFrame. Then, we cleaned up the column names to make them easier to utilize when performing data wrangling and EDA. 
+The raw dataset did not require much data cleaning to be used. 
+
+After reading the raw data into a Pandas DataFrame, we dropped extra columns such as `variables` and `OBS` that contained no meaningful information.
+
+We also converted the column names to snake case, making them easier to reference when performing data wrangling and EDA. 
 
 A portion of selected columns from the cleaned DataFrame is displayed below.
 
@@ -49,7 +55,7 @@ A portion of selected columns from the cleaned DataFrame is displayed below.
 
 ### Univariate Analysis
 
-This bar plot illustrates the number of power outages across each climate region, highlighting the `Northeast` region's significantly higher outage count compared to all others.
+First, we investigated the number of power outages across each climate region. This bar plot highlights the `Northeast` region's significantly higher outage count compared to all others.
 
 <iframe
   src="assets/univariate-plot1.html"
@@ -126,7 +132,6 @@ Expanding on the distribution of outage causes, this pivot table shows how these
 | public appeal                 |     22 |       34 |     13 |
 | severe weather                |    239 |      354 |    166 |
 | system operability disruption |     37 |       59 |     30 |
-
 
 ## Assessment of Missingness
 
@@ -287,3 +292,8 @@ The following histogram displays the empirical distribution from our simulation,
 ></iframe>
 
 This disparity suggests that the model may be biased toward certain characteristics associated with the severity of outages, such as demand loss and outage duration. Such bias could result in inequitable resource allocation or decision-making in real-world applications, potentially leaving outages in smaller communities under-prioritized. To address this issue, further refinement of the model should incorporate fairness considerations across different groups, ensuring more equitable outcomes and enhancing the model's reliability and social impact.
+
+
+**References:**
+
+1. <a name="cite_note-1"></a> [](#cite_ref-1) Mukherjee, S., Nateghi, R., & Hastak, M. (2018). A multi-hazard approach to assess severe weather-induced major power outage risks in the U.S. Reliability Engineering & System Safety, 175, 283–305. https://doi.org/10.1016/j.ress.2018.03.015
