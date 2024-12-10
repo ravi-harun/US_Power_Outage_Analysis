@@ -12,7 +12,7 @@ This analysis investigates: *What factors have the most influence on the cause a
 
 The data used for our analysis is sourced from [Purdue University](https://engineering.purdue.edu/LASCI/research-data/outages). This raw dataset contains 1534 rows.
 
-The table below contains a data dictionary on a subset of relevant columns utilized for our analysis (referenced by our cleaned data in snake case).
+The table below contains a data dictionary <a name="cite_ref-2"></a>[<sup>2</sup>](#cite_note-2) on a subset of relevant columns utilized for our analysis (referenced in cleaned snake case column names).
 
 |Variable name|Description|
 |---|---|
@@ -297,3 +297,4 @@ This disparity suggests that the model may be biased toward certain characterist
 **References:**
 
 1. <a name="cite_note-1"></a> [](#cite_ref-1) Mukherjee, S., Nateghi, R., & Hastak, M. (2018). A multi-hazard approach to assess severe weather-induced major power outage risks in the U.S. Reliability Engineering & System Safety, 175, 283–305. https://doi.org/10.1016/j.ress.2018.03.015
+2. <a name="cite_note-2"></a> [](#cite_ref-2) Mukherjee, S., Nateghi, R., & Hastak, M. (2018). Data on major power outage events in the continental U.S. Data in Brief, 19, 2079–2083. https://doi.org/10.1016/j.dib.2018.06.067
