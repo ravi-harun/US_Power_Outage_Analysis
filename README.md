@@ -1,5 +1,6 @@
-# A Data Analysis of Major U.S. Power Outages (2000-2016)
-**By:**
+# A Data Analysis of Major U.S. Power Outages 
+
+**Authors**
 - Michael Tang (mjtang@ucsd.edu)
 - Ravi Harun (rharun@ucsd.edu)
 
@@ -160,6 +161,7 @@ The following histogram displays the empirical distribution from our simulation,
 
 ## Framing a Prediction Problem
 
+Our objective is to predict the cause behind major power outages (`cause_category`) to identify key contributing factors and support preventative measures. This is a multiclass classification problem, as outages can result from various factors. We evaluate our classification model using accuracy as the performance metric, chosen for its simplicity and effectiveness in assessing overall correctness in this context. To ensure real-world applicability and avoid data leakage, we only included features that are accessible before or as an outage is occurring, such as `climate_region` and `population`. Features that measure the severity of an outage like `outage_duration` or `customers_affected`, which are only known after an outage occurs, are excluded from the model.
 
 ## Baseline Model
 
