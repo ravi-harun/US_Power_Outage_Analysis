@@ -157,7 +157,7 @@ The proportion of the missingness is shown below.
 The empirical distribution is shown below. We obtained an observed TVD of 0.25 and a p-value of **0.006**. Since this p-value is statistically insignificant, we **reject** the Null Hypothesis in favor of the Alternative Hypothesis and conclude that `outage duration` is likley MAR dependent on `climate region`. 
 
 <iframe
-  src="assets/climate_reg_empirical_dist.html"
+  src="assets/climate_reg_empirical_dist_plot.html"
   width="800"
   height="600"
   frameborder="0"
@@ -181,7 +181,7 @@ The proportion of the missingness is shown below.
 The empirical distribution is shown below. We obtained an observed TVD of 0.22 and a p-value of **0.002**. Since this p-value is statistically insignificant, we **reject** the Null Hypothesis in favor of the Alternative Hypothesis and conclude that `outage duration` is not likely to be MAR dependent on `month`. 
 
 <iframe
-  src="assets/month_empirical_dist.html"
+  src="assets/month_empirical_dist_plot.html"
   width="800"
   height="600"
   frameborder="0"
