@@ -3,9 +3,9 @@
 - Michael Tang (mjtang@ucsd.edu)
 - Ravi Harun (rharun@ucsd.edu)
 
-Introduction
+## Introduction
 
-Ravi Harun
+
 <iframe
   src="assets/outage_plot.html"
   width="800"
@@ -21,3 +21,24 @@ Ravi Harun
 | severe weather     | cold               |
 | severe weather     | normal             |
 | severe weather     | warm               |
+
+
+## Data Cleaning and Exploratory Data Analysis
+
+
+## Assessment of Missingness
+
+
+## Hypothesis Testing
+
+
+## Framing a Prediction Problem
+
+
+## Baseline Model
+
+
+## Final Model
+
+
+## Fairness Analysis
