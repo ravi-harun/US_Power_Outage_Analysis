@@ -141,7 +141,7 @@ To understand the nature of outage durations further, we conducted a permutation
 To clearly separate observations with uncommon appearances, we used a **test statistic** of *absolute difference in group means*, which is defined as:
 
 $$
-| \text{mean duration (warm climate)} - \text{mean duration (cold climate)} |
+\left| \text{mean duration (warm climate)} - \text{mean duration (cold climate)} \right|
 $$
 
 This ensures we measure distances, such that large values of the test statistic correspond to one hypothesis, and small values correspond to the other. The absolute difference captures the magnitude of change in outage durations between warm and cold climate episodes, regardless of direction.
