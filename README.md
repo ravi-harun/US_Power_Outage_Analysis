@@ -30,23 +30,6 @@ The table below contains a data dictionary on relevant columns for our analysis 
 |`'total_price'`|Average monthly electricity price in the U.S. state (cents/kilowatt-hour)|
 |`'population'`|Population in the U.S. state in a year
 
-<iframe
-  src="assets/outage_plot.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-
-
-| cause_category     | climate_category   |
-|:-------------------|:-------------------|
-| severe weather     | normal             |
-| intentional attack | normal             |
-| severe weather     | cold               |
-| severe weather     | normal             |
-| severe weather     | warm               |
-
-
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
 
@@ -86,6 +69,22 @@ This bar plot shows the number of power outages distributed by `cause category`.
 ### Bivariate Analysis
 
 As we saw previously, severe weather and intentional attacks are the two leading causes of power outages in the dataset. While the median electricity price for outages from both causes is similar, severe weather outages exhibit greater price variability. This suggests that the timing and location of severe weather-related outages may differ more widely.
+
+<iframe
+  src="assets/bivariate-plot1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+This scatter plot depicts the relationship between demand loss and outage duration. Surprisingly, the data reveals that the longest outages did not necessarily result in the greatest demand loss accumulated. In fact, there are even a few outages with significant demand loss but relatively short durations. This suggests that other factors, such as climate region or cause category, may play a crucial role in determining how much total demand lost there is for a given outage.
+
+<iframe
+  src="assets/bivariate-plot2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Interesting Aggregates
 
