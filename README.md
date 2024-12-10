@@ -130,6 +130,64 @@ Expanding on the distribution of outage causes, this pivot table shows how these
 
 ## Assessment of Missingness
 
+### Missingness Dependency
+
+Given the valuable information that the `outage_duration` column provides, we believe that it is important to test its **MAR** (Defined as the chance that a value is missing *depends on other columns*, but *not* the actual missing value itself) dependency. We chose two columns, namely `climate_region` and `month`, and conducted a permutation test. Since both colums are categorical, we utilized a Total Variation Distance test-statistic, which is defined as the **distance between two categorical distributions**:
+
+If $A = [a_1, a_2, ..., a_k]$ and $B = [b_1, b_2, ..., b_k]$ are both categorical distributions, then the TVD between $A$ and $B$ is
+
+$$\text{TVD}(A, B) = \frac{1}{2} \sum_{i = 1}^k \big|a_i - b_i\big|$$
+
+and a significance value of 0.05 to determine statistical significancy of our claim. 
+
+#### Climate Region
+
+- **Null Hypothesis**: The distribution of`climate_region` is the same when `outage_duration` is missing and not missing.
+- **Alternative Hypothesis**: The distribution of `climate_region` is different when `outage_duration` is missing and not missing.
+
+The proportion of the missingness is shown below.
+
+<iframe
+  src="assets/climate_reg_bar_plot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The empirical distribution is shown below. We obtained an observed TVD of 0.25 and a p-value of **0.006**. Since this p-value is statistically insignificant, we **reject** the Null Hypothesis in favor of the Alternative Hypothesis and conclude that `outage duration` is likley MAR dependent on `climate region`. 
+
+<iframe
+  src="assets/climate_reg_empirical_dist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+#### Month
+
+- **Null Hypothesis**: The distribution of`month` is the same when `outage_duration` is missing and not missing.
+- **Alternative Hypothesis**: The distribution of `month` is different when `outage_duration` is missing and not missing.
+
+The proportion of the missingness is shown below.
+
+<iframe
+  src="assets/month_bar_plot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
+The empirical distribution is shown below. We obtained an observed TVD of 0.22 and a p-value of **0.002**. Since this p-value is statistically insignificant, we **reject** the Null Hypothesis in favor of the Alternative Hypothesis and conclude that `outage duration` is not likely to be MAR dependent on `month`. 
+
+<iframe
+  src="assets/month_empirical_dist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
 
 ## Hypothesis Testing
 
