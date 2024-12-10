@@ -132,6 +132,32 @@ Expanding on the distribution of outage causes, this pivot table shows how these
 
 ## Hypothesis Testing
 
+To understand the nature of outage durations further, we conducted a permutation test between outages that occurred during warm and cold climate episodes. The following hypotheses were tested at a 5% signficance level to determine if outage durations come from the same population:
+
+- **Null Hypothesis**: Outage durations during warm climate episodes and cold climate episodes have the same distribution, and the observed differences in our samples are due to random chance.
+
+- **Alternative Hypothesis**: Outage durations during warm climate episodes are different than outage durations during cold climate episodes, on average. The observed difference in our samples cannot be explained by random chance alone.
+
+To clearly separate observations with uncommon appearances, we used a **test statistic** of *absolute difference in group means*, which is defined as:
+
+$$
+| \text{mean duration (warm climate)} - \text{mean duration (cold climate)} |
+$$
+
+This ensures we measure distances, such that large values of the test statistic correspond to one hypothesis, and small values correspond to the other. The absolute difference captures the magnitude of change in outage durations between warm and cold climate episodes, regardless of direction.
+
+To simulate the permutation test, we run 10000 trials to repeatedly shuffle the durations, compute the means for each climate category, and calculate the test statistic. Each computed statistic is added to an array.
+
+By comparing our array of statistics with our calculated observed statistic, we computed a p-value of 0.757. Since our p-value is over our significance threshold of 0.05, we fail to reject the null hypothesis as there seems to be no significant difference between outage durations during warm climate episodes and cold climate episodes.
+
+The following histogram displays the empirical distribution from our simulation, showing that our observed statistic falls within the bounds of common values in the distribution.
+
+<iframe
+  src="assets/simulation-plot1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ## Framing a Prediction Problem
 
