@@ -52,8 +52,6 @@ The table below contains a data dictionary on relevant columns for our analysis 
 
 We dropped extra columns that remained from converting the raw Excel dataset into a Pandas DataFrame. Then, we cleaned up the column names to make them easier to utilize when performing data wrangling and EDA. 
 
-The `outage_start_date` and `outage_start_time` columns were combined into a single Timestamp column called `outage_start`. Similarly, the `outage_restoration_date` and `outage_restoration_time` columns were combined into a new column called `outage_restoration`. Subsequently, the old columns were dropped to avoid keeping duplicate information.
-
 A portion of selected columns from the cleaned DataFrame is displayed below.
 
 |   year |   month | us_state   | climate_region     | cause_category     |   outage_duration |   customers_affected |
@@ -69,7 +67,21 @@ A portion of selected columns from the cleaned DataFrame is displayed below.
 
 This bar plot illustrates the number of power outages across each climate region, highlighting the `Northeast` region's significantly higher outage count compared to all others.
 
+<iframe
+  src="assets/univariate-plot1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 This bar plot shows the number of power outages distributed by `cause category`. Severe weather and intentional attack outages are the two most common causes. 
+
+<iframe
+  src="assets/univariate-plot2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Bivariate Analysis
 
