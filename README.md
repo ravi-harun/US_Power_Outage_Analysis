@@ -90,9 +90,41 @@ This scatter plot depicts the relationship between demand loss and outage durati
 
 This table presents the mean values of key metrics for power outages, grouped by climate region. It emphasizes regional variations in outage duration, demand loss, and customers affected.
 
+| climate_region     |   anomaly_level |   outage_duration |   demand_loss_mw |   customers_affected |
+|:-------------------|----------------:|------------------:|-----------------:|---------------------:|
+| Central            |     -0.166332   |          2701.13  |          477.482 |             126810   |
+| East North Central |     -0.15942    |          5352.04  |          560.406 |             138389   |
+| Northeast          |     -0.176218   |          2991.66  |          537.411 |             121960   |
+| Northwest          |     -0.00681818 |          1284.5   |          177.897 |              81420   |
+| South              |      0.0180617  |          2846.1   |          399.087 |             183501   |
+| Southeast          |     -0.135333   |          2217.69  |          761.533 |             180540   |
+| Southwest          |     -0.0467391  |          1566.14  |          424.556 |              39028   |
+| West               |     -0.0285714  |          1628.33  |          651.457 |             194580   |
+| West North Central |     -0.2375     |           696.562 |          326     |              47316   |
+
 This pivot table summarizes the frequency of power outages by cause category across different climate regions, offering insights into the distribution of outage causes regionally.
 
+| cause_category                |   Central |   East North Central |   Northeast |   Northwest |   South |   Southeast |   Southwest |   West |   West North Central |
+|:------------------------------|----------:|---------------------:|------------:|------------:|--------:|------------:|------------:|-------:|---------------------:|
+| equipment failure             |         7 |                    3 |           5 |           2 |      10 |           5 |           5 |     21 |                    1 |
+| fuel supply emergency         |         4 |                    5 |          14 |           1 |       7 |           0 |           2 |     17 |                    1 |
+| intentional attack            |        38 |                   20 |         135 |          89 |      28 |           9 |          64 |     31 |                    4 |
+| islanding                     |         3 |                    1 |           1 |           5 |       2 |           0 |           1 |     28 |                    5 |
+| public appeal                 |         2 |                    2 |           4 |           2 |      42 |           5 |           1 |      9 |                    2 |
+| severe weather                |       135 |                  104 |         176 |          29 |     113 |         118 |          10 |     70 |                    4 |
+| system operability disruption |        11 |                    3 |          15 |           4 |      27 |          16 |           9 |     41 |                    0 |
+
 Expanding on the distribution of outage causes, this pivot table shows how these causes vary across different climate conditions.
+
+| cause_category                |   cold |   normal |   warm |
+|:------------------------------|-------:|---------:|-------:|
+| equipment failure             |     19 |       28 |     10 |
+| fuel supply emergency         |     19 |       26 |      5 |
+| intentional attack            |    122 |      226 |     70 |
+| islanding                     |     15 |       17 |     14 |
+| public appeal                 |     22 |       34 |     13 |
+| severe weather                |    239 |      354 |    166 |
+| system operability disruption |     37 |       59 |     30 |
 
 
 ## Assessment of Missingness
