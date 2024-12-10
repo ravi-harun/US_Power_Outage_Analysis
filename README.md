@@ -249,7 +249,6 @@ To optimize performance, GridSearchCV was used to perform hyperparameter tuning,
 
 - `n_estimators: 300` – Utilizes 300 trees to enhance the stability and accuracy of predictions.
 
-Model Performance and Improvement
 The final model achieves an accuracy of 0.660 on the test set, an improvement over the baseline model's accuracy of 0.603. This performance boost is attributed to the inclusion of additional features that capture critical aspects of the data-generating process, such as seasonal patterns, regional differences, and population-driven demand.
 
 ## Fairness Analysis
