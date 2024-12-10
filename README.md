@@ -168,3 +168,38 @@ The following histogram displays the empirical distribution from our simulation,
 
 
 ## Fairness Analysis
+
+We assess the fairness of our model by performing a fairness analysis on two groups:
+
+- Small outages, defined as affecting less than 140,000 customers
+- Large outages, defined as affecting more than 140,000 customers
+
+The threshold between the two groups is chosen based on the mean number of `customers_affected` for power outages in our dataset.
+
+We compare the cause category predicted by our model across the two groups as a measure of how our model can classify severity of an outage. We used the accuracy evaluation metric in testing the following hypotheses at a 5% signficance level to determine if our classifier achieves accuracy parity:
+
+- **Null Hypothesis**: Our model is fair. Its accuracy for small outages and large outages are roughly the same, and any differences are due to random chance.
+
+- **Alternative Hypothesis**: Our model is unfair. Its accuracy for small outages is significantly different than its accuracy for large outages.
+
+To clearly separate observations with uncommon appearances, we used a **test statistic** of *absolute difference in group means*, which is defined as:
+
+$$
+| \text{mean accuracy score (small outages)} - \text{mean accuracy score (large outages)} |
+$$
+
+We transform the `customers_affected` column using `Binarizer` to classify observations into binary classes based on the threshold of 140,000 customers affected, creating a new column called `bi_customers_affected`. 
+To simulate the permutation test, we run 1000 trials to repeatedly shuffle `bi_customers_affected`. We calculate the test statistic, the accuracy score for our model's predicted cause category and actual cause category.
+
+The p-value from our permutation test is **0.0**, indicating a statistically significant result under a 5% significance level. Therefore, we reject the null hypothesis that our model is fair. The model performs differently for small outages that affect less than 140,000 customers and large outages that affect more than 140,000 customers.
+
+The following histogram displays the empirical distribution from our simulation, showing that our observed statistic is not a commonly observed value in the distribution.
+
+<iframe
+  src="assets/simulation-plot2.html"
+  width="1000"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The disparity across groups suggests that the model may be biased toward certain characteristics associated with the severity of outages, such as demand loss and outage duration. Such bias could result in inequitable resource allocation or decision-making in real-world applications, potentially leaving smaller-scale outages under-prioritized. To address this issue, further refinement of the model should incorporate fairness considerations across different groups, ensuring more equitable outcomes and enhancing the model's reliability and social impact.
