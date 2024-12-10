@@ -153,7 +153,7 @@ The following histogram displays the empirical distribution from our simulation,
 
 <iframe
   src="assets/simulation-plot1.html"
-  width="800"
+  width="1000"
   height="600"
   frameborder="0"
 ></iframe>
