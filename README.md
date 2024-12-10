@@ -223,35 +223,60 @@ Our objective is to predict the cause behind major power outages (`cause_categor
 
 ## Baseline Model
 
+For our baseline model, we utilize a random forest classifier with two features: `us_state` and `total_price`. The `us_state` feature, a categorical nominal variable, is transformed into a set of binary features through one-hot encoding to make it compatible with the model. In contrast, `total_price` is already a quantitative variable and does not require any transformation.
+
+The baseline model achieves an accuracy of 0.603 on the test set, indicating a moderate performance in predicting the cause category of a power outage. Considering the complexity of factors influencing power outage causes, this result is reasonable given the model's reliance on only two features.
 
 ## Final Model
 
+The final model builds upon the baseline by incorporating three additional features: `month`, `climate_region`, and `population`. These features were selected based on their relevance to the data-generating process and their potential to improve predictive performance.
+
+`month` is an ordinal variable that can capture seasonality, which is crucial because power outages often correlate with seasonal factors such as extreme weather events (e.g., hurricanes, heatwaves, or winter storms). Including this feature allows the model to account for monthly variations in outage causes.
+
+`climate_region` is a categorical nominal variable that can provide regional context, highlighting differences in environmental and infrastructural factors across various parts of the United States. For instance, some regions may be more prone to outages caused by hurricanes, while others may face risks from snowstorms.
+
+`population` is a quantitative variable that can reflect the electricity consumption based on the number of people in a region. Areas with larger populations may experience different outage patterns compared to less densely populated areas.
+
+By combining these features with `us_state` and `total_price` from the baseline model, the model leverages both local and broader contextual information to better predict the cause categories of power outages.
+
+The final model also employs a random forest classifier, selected for its ability to handle a mix of categorical and continuous variables, robustness to feature scaling, and resistance to overfitting when appropriately tuned. 
+
+To optimize performance, GridSearchCV was used to perform hyperparameter tuning, with the best hyperparameters found to be:
+
+- `max_depth: 12` – Limits the depth of each tree to prevent overfitting while retaining sufficient complexity to capture patterns.
+
+- `min_samples_split: 15` – Ensures that splits occur only if a node contains at least 15 samples, reducing the likelihood of creating overly specific branches.
+
+- `n_estimators: 300` – Utilizes 300 trees to enhance the stability and accuracy of predictions.
+
+Model Performance and Improvement
+The final model achieves an accuracy of 0.660 on the test set, an improvement over the baseline model's accuracy of 0.603. This performance boost is attributed to the inclusion of additional features that capture critical aspects of the data-generating process, such as seasonal patterns, regional differences, and population-driven demand.
 
 ## Fairness Analysis
 
 We assess the fairness of our model by performing a fairness analysis on two groups:
 
-- Small outages, defined as affecting less than 140,000 customers
-- Large outages, defined as affecting more than 140,000 customers
+- Small populations, defined as populations less than 13,000,000
+- Large populations, defined as populations greater than 13,000,000
 
-The threshold between the two groups is chosen based on the mean number of `customers_affected` for power outages in our dataset.
+The threshold between the two groups is chosen based on the mean number of `population` for power outages in our dataset.
 
 We compare the cause category predicted by our model across the two groups as a measure of how our model can classify severity of an outage. We used the accuracy evaluation metric in testing the following hypotheses at a 5% signficance level to determine if our classifier achieves accuracy parity:
 
-- **Null Hypothesis**: Our model is fair. Its accuracy for small outages and large outages are roughly the same, and any differences are due to random chance.
+- **Null Hypothesis**: Our model is fair. Its accuracy for small populations and large populations are roughly the same, and any differences are due to random chance.
 
-- **Alternative Hypothesis**: Our model is unfair. Its accuracy for small outages is significantly different than its accuracy for large outages.
+- **Alternative Hypothesis**: Our model is unfair. Its accuracy for small populations is significantly different than its accuracy for large populations.
 
 To clearly separate observations with uncommon appearances, we used a **test statistic** of *absolute difference in group means*, which is defined as:
 
 $$
-| \text{mean accuracy score (small outages)} - \text{mean accuracy score (large outages)} |
+| \text{mean accuracy score (small populations)} - \text{mean accuracy score (large populations)} |
 $$
 
-We transform the `customers_affected` column using `Binarizer` to classify observations into binary classes based on the threshold of 140,000 customers affected, creating a new column called `bi_customers_affected`. 
-To simulate the permutation test, we run 1000 trials to repeatedly shuffle `bi_customers_affected`. We calculate the test statistic, the accuracy score for our model's predicted cause category and actual cause category.
+We transform the `population` column using `Binarizer` to classify observations into binary classes based on the threshold of a population size of 13,000,000, creating a new column called `bi_population`. 
+To simulate the permutation test, we run 1000 trials to repeatedly shuffle `bi_population`. We calculate the test statistic, the accuracy score for our model's predicted cause category and actual cause category.
 
-The p-value from our permutation test is **0.0**, indicating a statistically significant result under a 5% significance level. Therefore, we reject the null hypothesis that our model is fair. The model performs differently for small outages that affect less than 140,000 customers and large outages that affect more than 140,000 customers.
+The p-value from our permutation test is **0.0**, indicating a statistically significant result under a 5% significance level. Therefore, we reject the null hypothesis that our model is fair. The model performs differently for small populations of less than 13,000,000 people and large populations of more than 13,000,000 people.
 
 The following histogram displays the empirical distribution from our simulation, showing that our observed statistic is not a commonly observed value in the distribution.
 
@@ -262,4 +287,4 @@ The following histogram displays the empirical distribution from our simulation,
   frameborder="0"
 ></iframe>
 
-The disparity across groups suggests that the model may be biased toward certain characteristics associated with the severity of outages, such as demand loss and outage duration. Such bias could result in inequitable resource allocation or decision-making in real-world applications, potentially leaving smaller-scale outages under-prioritized. To address this issue, further refinement of the model should incorporate fairness considerations across different groups, ensuring more equitable outcomes and enhancing the model's reliability and social impact.
+This disparity suggests that the model may be biased toward certain characteristics associated with the severity of outages, such as demand loss and outage duration. Such bias could result in inequitable resource allocation or decision-making in real-world applications, potentially leaving outages in smaller communities under-prioritized. To address this issue, further refinement of the model should incorporate fairness considerations across different groups, ensuring more equitable outcomes and enhancing the model's reliability and social impact.
