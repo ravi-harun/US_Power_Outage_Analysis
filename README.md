@@ -95,7 +95,7 @@ This scatter plot depicts the relationship between demand loss and outage durati
 
 ### Interesting Aggregates
 
-This table presents the mean values of key metrics for power outages, grouped by climate region. It emphasizes regional variations in outage duration, demand loss, and customers affected. Notably, `South` is the only region with a positive anomaly level
+This table presents the mean values of key metrics for power outages, grouped by climate region. It emphasizes regional variations in outage duration, demand loss, and customers affected. Interestingly, `South` is the only region with a positive anomaly level.
 
 | climate_region     |   anomaly_level |   outage_duration |   demand_loss_mw |   customers_affected |
 |:-------------------|----------------:|------------------:|-----------------:|---------------------:|
