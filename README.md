@@ -143,7 +143,7 @@ Expanding on the distribution of outage causes, this pivot table shows how these
 
 Given the valuable information that the `outage_duration` column provides, we believe that it is important to test its **MAR** dependency.
 This is defined as the chance that a value is missing *depends on other columns*, but *not* the actual missing value itself. 
-We chose two columns, namely `climate_region` and `month`, and conducted a permutation test at a 5% significance level to determine statistical significancy. 
+We chose two columns, `climate_region` and `month`, and conducted a permutation test on each at a 5% significance level to determine statistical significancy. 
 
 Since both columns are categorical, we utilized a Total Variation Distance (TVD) test statistic to measure the distance between two categorical distributions:
 
@@ -165,7 +165,7 @@ The proportion of the missingness is shown below.
   frameborder="0"
 ></iframe>
 
-The empirical distribution is shown below. We obtained an observed TVD of 0.25 and a p-value of **0.006**. Since this p-value is statistically insignificant, we **reject** the null hypothesis in favor of the alternative hypothesis and conclude that `outage duration` is likely MAR dependent on `climate region`. 
+The empirical distribution is shown below. We obtained an observed TVD of 0.25 and a p-value of **0.006**. Since this p-value is statistically significant, we **reject** the null hypothesis in favor of the alternative hypothesis and conclude that `outage duration` is likely MAR dependent on `climate region`. 
 
 <iframe
   src="assets/climate_reg_empirical_dist_plot.html"
@@ -188,7 +188,6 @@ The proportion of the missingness is shown below.
   frameborder="0"
 ></iframe>
 
-
 The empirical distribution is shown below. We obtained an observed TVD of 0.22 and a p-value of **0.112**. Since this p-value is statistically insignificant, we **fail to reject** the null hypothesis and conclude that `outage duration` is not likely to be MAR dependent on `month`. 
 
 <iframe
@@ -197,8 +196,6 @@ The empirical distribution is shown below. We obtained an observed TVD of 0.22 a
   height="600"
   frameborder="0"
 ></iframe>
-
-
 
 ## Hypothesis Testing
 
