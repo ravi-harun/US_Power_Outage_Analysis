@@ -137,7 +137,9 @@ Expanding on the distribution of outage causes, this pivot table shows how these
 
 ### NMAR Analysis
 
+Our dataset contains several columns with missing values. Amongst those, the `demand_loss_mw` column is likely to be Not Missing At Random (NMAR), such that the missing values in that column depends on the actual missing values. This is because the missingness is likely due to the data collection method, where certain utility companies may choose not to report the amount of demand lost during an outage due to several reasons such as measurement challenges or minor outages. 
 
+If we had access to the outage reports of each utility company responsible for electricity in a given region, we could gain further insight into the missingness mechanism and determine whether `demand_loss_mw` is actually MAR. Then, we would run an analysis on whether the missingness of demand lost reported is dependent on the company.
 
 ### Missingness Dependency
 
@@ -145,11 +147,7 @@ Given the valuable information that the `outage_duration` column provides, we be
 This is defined as the chance that a value is missing *depends on other columns*, but *not* the actual missing value itself. 
 We chose two columns, `climate_region` and `month`, and conducted a permutation test on each at a 5% significance level to determine statistical significancy. 
 
-Since both columns are categorical, we utilized a Total Variation Distance (TVD) test statistic to measure the distance between two categorical distributions:
-
-If $A = [a_1, a_2, ..., a_k]$ and $B = [b_1, b_2, ..., b_k]$ are both categorical distributions, then the TVD between $A$ and $B$ is
-
-$$\text{TVD}(A, B) = \frac{1}{2} \sum_{i = 1}^k \big|a_i - b_i\big|$$
+Since both columns are categorical, we utilized a Total Variation Distance (TVD) test statistic to measure the distance between two categorical distributions.
 
 #### Climate Region
 
@@ -207,8 +205,7 @@ To understand the nature of outage durations further, we conducted a permutation
 
 To clearly separate observations with uncommon appearances, we used a **test statistic** of *absolute difference in group means*, which is defined as:
 
-$$ | \text{mean duration (warm climate)} - \text{mean duration (cold climate)} | $$
-
+| mean duration (warm climate) - mean duration (cold climate) |
 
 This ensures we measure distances, such that large values of the test statistic correspond to one hypothesis, and small values correspond to the other. The absolute difference captures the magnitude of change in outage durations between warm and cold climate episodes, regardless of direction.
 
@@ -276,9 +273,7 @@ We compare the cause category predicted by our model across the two groups as a 
 
 To clearly separate observations with uncommon appearances, we used a **test statistic** of *absolute difference in group means*, which is defined as:
 
-$$
-| \text{mean accuracy score (small populations)} - \text{mean accuracy score (large populations)} |
-$$
+| mean accuracy score (small populations) - mean accuracy score (large populations) |
 
 We transform the `population` column using `Binarizer` to classify observations into binary classes based on the threshold of a population size of 13,000,000, creating a new column called `bi_population`. 
 To simulate the permutation test, we run 1000 trials to repeatedly shuffle `bi_population`. We calculate the test statistic, the accuracy score for our model's predicted cause category and actual cause category.
