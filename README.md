@@ -22,8 +22,8 @@ The table below contains a data dictionary <a name="cite_ref-2"></a>[<sup>2</sup
 |`'postal_code'`|Represents the postal code of the U.S. states|
 |`'nerc_region'`|The North American Electric Reliability Corporation (NERC) regions involved in the outage event|
 |`'climate_region'`|U.S. Climate regions as specified by National Centers for Environmental Information (nine climatically consistent regions in continental U.S.A.)|
-|`'anomaly_level'`|This represents the oceanic El Niño/La Niña (ONI) index referring to the cold and warm episodes by season. It is estimated as a 3-month running mean of ERSST.v4 SST anomalies in the Niño 3.4 region (5°N to 5°S, 120–170°W) [6]|
-|`'climate_category'`|This represents the climate episodes corresponding to the years. The categories—“Warm”, “Cold” or “Normal” episodes of the climate are based on a threshold of ± 0.5 °C for the Oceanic Niño Index (ONI)|
+|`'anomaly_level'`|This represents the oceanic El Niño/La Niña (ONI) index referring to the cold and warm episodes by season|
+|`'climate_category'`|This represents the climate episodes corresponding to the years|
 |`'cause_category'`|Categories of all the events causing the major power outages|
 |`'cause_category_detail'`|Detailed description of the event categories causing the major power outages|
 |`'hurricane_names'`|If the outage is due to a hurricane, then the hurricane name is given by this variable|
@@ -95,7 +95,7 @@ This scatter plot depicts the relationship between demand loss and outage durati
 
 ### Interesting Aggregates
 
-This table presents the mean values of key metrics for power outages, grouped by climate region. It emphasizes regional variations in outage duration, demand loss, and customers affected.
+This table presents the mean values of key metrics for power outages, grouped by climate region. It emphasizes regional variations in outage duration, demand loss, and customers affected. Notably, `South` is the only region with a positive anomaly level
 
 | climate_region     |   anomaly_level |   outage_duration |   demand_loss_mw |   customers_affected |
 |:-------------------|----------------:|------------------:|-----------------:|---------------------:|
@@ -109,7 +109,7 @@ This table presents the mean values of key metrics for power outages, grouped by
 | West               |     -0.0285714  |          1628.33  |          651.457 |             194580   |
 | West North Central |     -0.2375     |           696.562 |          326     |              47316   |
 
-This pivot table summarizes the frequency of power outages by cause category across different climate regions, offering insights into the distribution of outage causes regionally.
+This pivot table summarizes the frequency of power outages by cause category across different climate regions, offering insights into the distribution of outage causes regionally. While most regions are affected by severe weather the most, this is not the case for regions like `Northwest` and `Southwest`, as intentional attacks are the most frequent causes.
 
 | cause_category                |   Central |   East North Central |   Northeast |   Northwest |   South |   Southeast |   Southwest |   West |   West North Central |
 |:------------------------------|----------:|---------------------:|------------:|------------:|--------:|------------:|------------:|-------:|---------------------:|
@@ -135,19 +135,25 @@ Expanding on the distribution of outage causes, this pivot table shows how these
 
 ## Assessment of Missingness
 
+### NMAR Analysis
+
+
+
 ### Missingness Dependency
 
-Given the valuable information that the `outage_duration` column provides, we believe that it is important to test its **MAR** (Defined as the chance that a value is missing *depends on other columns*, but *not* the actual missing value itself) dependency. We chose two columns, namely `climate_region` and `month`, and conducted a permutation test. Since both colums are categorical, we utilized a Total Variation Distance test-statistic, which is defined as the **distance between two categorical distributions**:
+Given the valuable information that the `outage_duration` column provides, we believe that it is important to test its **MAR** dependency.
+This is defined as the chance that a value is missing *depends on other columns*, but *not* the actual missing value itself. 
+We chose two columns, namely `climate_region` and `month`, and conducted a permutation test at a 5% significance level to determine statistical significancy. 
+
+Since both columns are categorical, we utilized a Total Variation Distance (TVD) test statistic to measure the distance between two categorical distributions:
 
 If $A = [a_1, a_2, ..., a_k]$ and $B = [b_1, b_2, ..., b_k]$ are both categorical distributions, then the TVD between $A$ and $B$ is
 
 $$\text{TVD}(A, B) = \frac{1}{2} \sum_{i = 1}^k \big|a_i - b_i\big|$$
 
-and a significance value of 0.05 to determine statistical significancy of our claim. 
-
 #### Climate Region
 
-- **Null Hypothesis**: The distribution of`climate_region` is the same when `outage_duration` is missing and not missing.
+- **Null Hypothesis**: The distribution of `climate_region` is the same when `outage_duration` is missing and not missing.
 - **Alternative Hypothesis**: The distribution of `climate_region` is different when `outage_duration` is missing and not missing.
 
 The proportion of the missingness is shown below.
@@ -159,7 +165,7 @@ The proportion of the missingness is shown below.
   frameborder="0"
 ></iframe>
 
-The empirical distribution is shown below. We obtained an observed TVD of 0.25 and a p-value of **0.006**. Since this p-value is statistically insignificant, we **reject** the Null Hypothesis in favor of the Alternative Hypothesis and conclude that `outage duration` is likley MAR dependent on `climate region`. 
+The empirical distribution is shown below. We obtained an observed TVD of 0.25 and a p-value of **0.006**. Since this p-value is statistically insignificant, we **reject** the null hypothesis in favor of the alternative hypothesis and conclude that `outage duration` is likely MAR dependent on `climate region`. 
 
 <iframe
   src="assets/climate_reg_empirical_dist_plot.html"
@@ -170,7 +176,7 @@ The empirical distribution is shown below. We obtained an observed TVD of 0.25 a
 
 #### Month
 
-- **Null Hypothesis**: The distribution of`month` is the same when `outage_duration` is missing and not missing.
+- **Null Hypothesis**: The distribution of `month` is the same when `outage_duration` is missing and not missing.
 - **Alternative Hypothesis**: The distribution of `month` is different when `outage_duration` is missing and not missing.
 
 The proportion of the missingness is shown below.
@@ -183,7 +189,7 @@ The proportion of the missingness is shown below.
 ></iframe>
 
 
-The empirical distribution is shown below. We obtained an observed TVD of 0.22 and a p-value of **0.002**. Since this p-value is statistically insignificant, we **reject** the Null Hypothesis in favor of the Alternative Hypothesis and conclude that `outage duration` is not likely to be MAR dependent on `month`. 
+The empirical distribution is shown below. We obtained an observed TVD of 0.22 and a p-value of **0.112**. Since this p-value is statistically insignificant, we **fail to reject** the null hypothesis and conclude that `outage duration` is not likely to be MAR dependent on `month`. 
 
 <iframe
   src="assets/month_empirical_dist_plot.html"
@@ -294,7 +300,7 @@ The following histogram displays the empirical distribution from our simulation,
 This disparity suggests that the model may be biased toward certain characteristics associated with the severity of outages, such as demand loss and outage duration. Such bias could result in inequitable resource allocation or decision-making in real-world applications, potentially leaving outages in smaller communities under-prioritized. To address this issue, further refinement of the model should incorporate fairness considerations across different groups, ensuring more equitable outcomes and enhancing the model's reliability and social impact.
 
 
-**References:**
+## References
 
 1. <a name="cite_note-1"></a> [](#cite_ref-1) Mukherjee, S., Nateghi, R., & Hastak, M. (2018). A multi-hazard approach to assess severe weather-induced major power outage risks in the U.S. Reliability Engineering & System Safety, 175, 283–305. https://doi.org/10.1016/j.ress.2018.03.015
 2. <a name="cite_note-2"></a> [](#cite_ref-2) Mukherjee, S., Nateghi, R., & Hastak, M. (2018). Data on major power outage events in the continental U.S. Data in Brief, 19, 2079–2083. https://doi.org/10.1016/j.dib.2018.06.067
