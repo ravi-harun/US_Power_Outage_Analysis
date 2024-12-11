@@ -73,6 +73,15 @@ This bar plot shows the number of power outages distributed by `cause category`.
   frameborder="0"
 ></iframe>
 
+The heatmap below illustrates the number of outages across states, with yellow indicating fewer outages and red indicating higher numbers. California stands out with the highest number of outages compared to other states.
+
+<iframe
+  src="assets/outages_by_state.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ### Bivariate Analysis
 
 As we saw previously, severe weather and intentional attacks are the two leading causes of power outages in the dataset. While the median electricity price for outages from both causes is similar, severe weather outages exhibit greater price variability. This suggests that the timing and location of severe weather-related outages may differ more widely.
