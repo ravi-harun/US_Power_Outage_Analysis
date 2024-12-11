@@ -163,7 +163,7 @@ The proportion of the missingness is shown below.
   frameborder="0"
 ></iframe>
 
-The empirical distribution is shown below. We obtained an observed TVD of 0.25 and a p-value of **0.006**. Since this p-value is statistically significant, we **reject** the null hypothesis in favor of the alternative hypothesis and conclude that `outage_duration` is likely MAR dependent on `climate region`. 
+The empirical distribution is shown below. We obtained an observed TVD of 0.25 and a p-value of **0.006**. Since this p-value is statistically significant, we **reject** the null hypothesis in favor of the alternative hypothesis and conclude that `outage_duration` is likely MAR dependent on `climate_region`. 
 
 <iframe
   src="assets/climate_reg_empirical_dist_plot.html"
