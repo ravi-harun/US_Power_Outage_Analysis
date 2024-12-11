@@ -109,7 +109,7 @@ This table presents the mean values of key metrics for power outages, grouped by
 | West               |     -0.0285714  |          1628.33  |          651.457 |             194580   |
 | West North Central |     -0.2375     |           696.562 |          326     |              47316   |
 
-This pivot table summarizes the frequency of power outages by cause category across different climate regions, offering insights into the distribution of outage causes regionally. While most regions are affected by severe weather the most, this is not the case for regions like `Northwest` and `Southwest`, as intentional attacks are the most frequent causes.
+This pivot table summarizes the frequency of power outages by cause_category across different climate regions, offering insights into the distribution of outage causes regionally. While most regions are affected by severe weather the most, this is not the case for regions like `Northwest` and `Southwest`, as intentional attacks are the most frequent causes.
 
 | cause_category                |   Central |   East North Central |   Northeast |   Northwest |   South |   Southeast |   Southwest |   West |   West North Central |
 |:------------------------------|----------:|---------------------:|------------:|------------:|--------:|------------:|------------:|-------:|---------------------:|
