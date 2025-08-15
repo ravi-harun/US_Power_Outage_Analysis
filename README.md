@@ -1,5 +1,5 @@
 # A Data Analysis of Major U.S. Power Outages 
-
+<I> This project recieved a 100/100 from UC San Diego's DSC 80 Fall 2024 Offering.
 **Authors**
 - Michael Tang (mjtang@ucsd.edu)
 - Ravi Harun (rharun@ucsd.edu)
